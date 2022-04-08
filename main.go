@@ -1,4 +1,7 @@
+package send
+/*
 package main
+
 
 import (
 	"fmt"
@@ -37,4 +40,4 @@ func main() {
 		return
 	}
 	fmt.Println("go check your email")
-}
+}*/

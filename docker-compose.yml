@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  send-task:
+    build: ./
+    command: ./cmd/wait-for-postgres.sh db ./send-task
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+    environment:
+      - POSTGRES_INITDB_ARGS="--auth-host=scram-sha-256"
+      - DB_PASSWORD=garrix
+
+  db:
+    restart: always
+    image: postgres:latest
+    volumes:
+      - ./.database/postgres/data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_INITDB_ARGS="--auth-host=scram-sha-256"
+      - POSTGRES_PASSWORD=garrix
+    ports:
+      - 5436:5432
