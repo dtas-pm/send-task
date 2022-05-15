@@ -7,6 +7,7 @@ type Student struct {
 	Login     string   `json:"login"`
 	Email     []string `json:"email"`
 	Institute string   `json:"institute"`
+	Group string `json:"group"`
 }
 
 type Group struct {

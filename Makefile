@@ -18,9 +18,9 @@ drop-app:
 .PHONY: migrate-up
 migrate-up:
 	$(info Migrate up...)
-	migrate -path ./schema -database 'postgres://postgres:garrix@localhost:5436/postgres?sslmode=disable' up
+	migrate -path ./schema -database 'postgres://postgres:qwerty@localhost:5436/postgres?sslmode=disable' up
 
 .PHONY: migrate-down
 migrate-down:
 	$(info Migrate down...)
-	migrate -path ./schema -database 'postgres://postgres:garrix@localhost:5436/postgres?sslmode=disable' down
+	migrate -path ./schema -database 'postgres://postgres:qwerty@localhost:5436/postgres?sslmode=disable' down

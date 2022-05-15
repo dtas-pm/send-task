@@ -9,8 +9,7 @@ services:
     depends_on:
       - db
     environment:
-      - POSTGRES_INITDB_ARGS="--auth-host=scram-sha-256"
-      - DB_PASSWORD=garrix
+      - DB_PASSWORD=qwerty
 
   db:
     restart: always
@@ -18,7 +17,6 @@ services:
     volumes:
       - ./.database/postgres/data:/var/lib/postgresql/data
     environment:
-      - POSTGRES_INITDB_ARGS="--auth-host=scram-sha-256"
-      - POSTGRES_PASSWORD=garrix
+      - POSTGRES_PASSWORD=qwerty
     ports:
       - 5436:5432

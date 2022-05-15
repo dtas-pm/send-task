@@ -32,9 +32,9 @@ CREATE TYPE endpoint AS
 CREATE TABLE discipline
 (
    id serial not null unique,
-   name varchar(255) not null,
-   endpoints endpoint[] not null,
-   groups varchar(255)[] not null
+   name varchar(255),
+   endpoints jsonb,
+   groups varchar(255)[]
 );
 
 CREATE TABLE users_discipline

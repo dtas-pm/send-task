@@ -4,6 +4,14 @@ import(
 	"fmt"
 	"github.com/jmoiron/sqlx"
 )
+
+const (
+	usersTable      = "users"
+	studentsTable = "students"
+	disciplineTable = "discipline"
+	usersDisciplineTable = "users_discipline"
+)
+
 type Config struct {
 	Host string
 	Port string
