@@ -13,10 +13,12 @@ func NewHandler(services *service.Service) *Handler {
 	return &Handler{services: services}
 }
 
-func (h * Handler) InitRoutes() *gin.Engine {
+func (h *Handler) InitRoutes() *gin.Engine {
 	router := gin.New()
 
-	router.LoadHTMLGlob("web/*")
+	router.LoadHTMLGlob("web/**/*")
+	router.Static("/style", "./web/style")
+	router.Static("/js", "./web/js")
 
 	auth := router.Group("/auth")
 	{

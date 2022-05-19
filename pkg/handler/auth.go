@@ -6,7 +6,7 @@ import (
 	"net/http"
 )
 
-func (h *Handler) signUp(c *gin.Context){
+func (h *Handler) signUp(c *gin.Context) {
 	var input send.User
 
 	if err := c.BindJSON(&input); err != nil {
@@ -20,7 +20,7 @@ func (h *Handler) signUp(c *gin.Context){
 		return
 	}
 
-	c.HTML(http.StatusOK, "web/template/index.html", gin.H{
+	c.HTML(http.StatusOK, "../web/template/sign-in.html", gin.H{
 		"id": id,
 	})
 
@@ -50,12 +50,10 @@ func (h *Handler) signIn(c *gin.Context) {
 	})
 }
 
-
 func (h *Handler) getSignIn(c *gin.Context) {
-	c.HTML(http.StatusOK, "web/template/index.html", gin.H{})
+	c.HTML(http.StatusOK, "sign-in.html", gin.H{})
 }
 
-
 func (h *Handler) getSignUp(c *gin.Context) {
-	c.HTML(http.StatusOK, "web/template/index.html", gin.H{})
+	c.HTML(http.StatusOK, "sign-up.html", gin.H{})
 }
