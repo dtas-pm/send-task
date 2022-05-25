@@ -11,22 +11,23 @@ func (h *Handler) createDiscipline(c *gin.Context) {
 	if err != nil {
 		return
 	}
-
-	var input send.Discipline
-	if err := c.BindJSON(&input); err != nil {
-		newErrorResponse(c, http.StatusBadRequest, err.Error())
-		return
+	var input = send.Discipline{
+		Name:  c.PostForm("new-name-discipline"),
+		Group: c.PostForm("new-groups-discipline"),
+		Event: send.Event{},
 	}
 
-	id, err := h.services.DisciplineList.Create(userId, input)
+	//if err := c.BindJSON(&input); err != nil {
+	//	newErrorResponse(c, http.StatusBadRequest, err.Error())
+	//	return
+	//}
+
+	_, err = h.services.DisciplineList.Create(userId, input)
 	if err != nil {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
 	}
-
-	c.JSON(http.StatusOK, map[string]interface{}{
-		"id": id,
-	})
+	c.Redirect(http.StatusFound, "/api/disciplines")
 }
 
 func (h *Handler) getAllDiscipline(c *gin.Context) {
@@ -42,7 +43,7 @@ func (h *Handler) getAllDiscipline(c *gin.Context) {
 	c.HTML(http.StatusOK, "discipline.html", gin.H{
 		"discipline": lists,
 	})
-	//c.JSON(http.StatusOK, map[string]interface{}{
+	//c.JSON(http.StatusOK, gin.H{
 	//	"lists": lists,
 	//})
 }

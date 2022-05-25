@@ -21,7 +21,7 @@ CREATE TABLE discipline
    id serial not null unique,
    name varchar(255),
    endpoints jsonb,
-   groups varchar(255)[]
+   groups varchar(255)
 );
 
 CREATE TABLE users_discipline

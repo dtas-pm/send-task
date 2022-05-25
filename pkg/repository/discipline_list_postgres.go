@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"github.com/dtas-pm/send-task"
 	"github.com/jmoiron/sqlx"
-	"github.com/lib/pq"
 )
 
 type DisciplineListPostgres struct {
@@ -24,7 +23,7 @@ func (r *DisciplineListPostgres) Create(userId int, item send.Discipline) (int, 
 
 	var id int
 	createListQuery := fmt.Sprintf("INSERT INTO %s (name, endpoints, groups) values ($1, $2, $3) RETURNING id", disciplineTable)
-	row := tx.QueryRow(createListQuery, item.Name, item.Event, pq.Array(item.Groups))
+	row := tx.QueryRow(createListQuery, item.Name, item.Event, item.Group)
 	if err := row.Scan(&id); err != nil {
 		tx.Rollback()
 		return 0, err
