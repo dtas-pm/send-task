@@ -17,4 +17,6 @@ func (s *DisciplineListService) Create(userId int, item send.Discipline) (int, e
 	return s.repo.Create(userId, item)
 }
 
-
+func (s *DisciplineListService) GetAllDiscipline(userId int) ([]send.Discipline, error) {
+	return s.repo.GetAllDiscipline(userId)
+}

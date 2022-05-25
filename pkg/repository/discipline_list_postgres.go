@@ -15,7 +15,6 @@ func NewDisciplineListPostgres(db *sqlx.DB) *DisciplineListPostgres {
 	return &DisciplineListPostgres{db: db}
 }
 
-
 func (r *DisciplineListPostgres) Create(userId int, item send.Discipline) (int, error) {
 	fmt.Println(item.Event)
 	tx, err := r.db.Begin()
@@ -38,4 +37,13 @@ func (r *DisciplineListPostgres) Create(userId int, item send.Discipline) (int, 
 		return 0, err
 	}
 	return id, tx.Commit()
+}
+
+func (r *DisciplineListPostgres) GetAllDiscipline(userId int) ([]send.Discipline, error) {
+	var lists []send.Discipline
+	query := fmt.Sprintf("SELECT tl.id, tl.name, tl.endpoints, tl.groups FROM %s tl INNER JOIN %s ul on tl.id = ul.discipline_id WHERE ul.users_id = $1",
+		disciplineTable, usersDisciplineTable)
+	err := r.db.Select(&lists, query, userId)
+
+	return lists, err
 }

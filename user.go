@@ -15,10 +15,10 @@ type User struct {
 }
 
 type Discipline struct {
-	Id     int      `json:"-"`
-	Name   string   `json:"name" binding:"required"`
-	Event  Event    `json:"endpoints"`
-	Groups []string `json:"groups"`
+	Id     int      `json:"id" db:"id"`
+	Name   string   `json:"name" db:"name" binding:"required"`
+	Event  Event    `json:"endpoints" db:"endpoints"`
+	Groups []string `json:"groups" db:"groups"`
 }
 
 type Event struct {

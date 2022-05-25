@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"crypto/tls"
 	send "github.com/dtas-pm/send-task"
 	"github.com/dtas-pm/send-task/pkg/handler"
 	"github.com/dtas-pm/send-task/pkg/repository"
@@ -28,12 +29,12 @@ func main() {
 	}
 
 	db, err := repository.NewPostgresDB(repository.Config{
-		Host: viper.GetString("db.host"),
-		Port: viper.GetString("db.port"),
+		Host:     viper.GetString("db.host"),
+		Port:     viper.GetString("db.port"),
 		Username: viper.GetString("db.username"),
 		Password: os.Getenv("DB_PASSWORD"),
-		DBName: viper.GetString("db.dbname"),
-		SSLMode: viper.GetString("db.sslmode"),
+		DBName:   viper.GetString("db.dbname"),
+		SSLMode:  viper.GetString("db.sslmode"),
 	})
 
 	if err != nil {
@@ -43,9 +44,14 @@ func main() {
 	services := service.NewService(repos)
 	handlers := handler.NewHandler(services)
 
+	cert, err := tls.LoadX509KeyPair("./certs/localhost.pem", "./certs/localhost-key.pem")
+	if err != nil {
+		logrus.Fatalf("error loading certs variables: %s", err.Error())
+	}
+
 	srv := new(send.Server)
 	go func() {
-		if err := srv.Run(viper.GetString("port"), handlers.InitRoutes()); err != nil && err != http.ErrServerClosed {
+		if err := srv.Run(viper.GetString("port"), cert, handlers.InitRoutes()); err != nil && err != http.ErrServerClosed {
 			logrus.Fatalf("error occured while running server: %s", err.Error())
 		}
 	}()

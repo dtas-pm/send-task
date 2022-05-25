@@ -1,11 +1,11 @@
 DROP TABLE users_discipline;
 
-DROP TABLE students;
-
 DROP TABLE users;
 
 DROP TABLE discipline;
 
-DROP TYPE endpoint;
+DROP TRIGGER t_students on students;
 
-DROP TYPE task;
+DROP TABLE students;
+
+DROP TABLE groups;

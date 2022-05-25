@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Students</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../style/students.css" />
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+<div class="document-gen" id="app-main">
+    <nav class="navbar navbar-light bg-light fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#" onclick=window.location.reload()>DTAS-PM</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <hr class="dropdown-divider">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3" aria-labelledby="offcanvasNavbarDropdown">
+                        <li class="nav-item dropdown-item">
+                            <a class="nav-link active" aria-current="page" href="#" ><label class="list-itemv">Your profile</label></a>
+                        </li>
+                        <li class="nav-item dropdown-item">
+                            <a class="nav-link active" aria-current="page" href="#" ><label class="list-itemv" onclick="window.location.href='disciplines'">Your discipline lists</label></a>
+                        </li>
+                        <li class="nav-item dropdown-item">
+                            <a class="nav-link active" aria-current="page" href="#" ><label class="list-itemv" onclick="window.location.href='students'">Your group lists</label></a>
+                        </li>
+                        <li class="nav-item"><hr class="dropdown-divider"></li>
+                        <!--                        <li class="nav-item dropdown-item">-->
+                        <!--                            <a class="nav-link active" href="#" id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" v-on:click="show_main=false; show_about=true">-->
+                        <!--                                <label class="list-itemv">Your profile</label>-->
+                        <!--                            </a>-->
+                        <!--                        </li>-->
+                        <li class="nav-item dropdown-item">
+                            <a class="nav-link active" aria-current="page" href="#" ><label class="list-itemv">Settings</label></a>
+                        </li>
+                        <li class="nav-item dropdown-item">
+                            <a class="nav-link active" aria-current="page" href="#" ><label class="list-itemv">Help</label></a>
+                        </li>
+                        <!--                        <li class="nav-item">-->
+                        <!--                            <div class="form-check form-switch">-->
+                        <!--                                <input class="form-check-input component-active-color" type="checkbox" id="flexSwitchCheckDefault" onclick="document.body.classList.toggle('dark-theme')">-->
+                        <!--                                <label class="form-check-label" for="flexSwitchCheckDefault">Dark theme</label>-->
+                        <!--                            </div>-->
+                        <!--                        </li>-->
+                    </ul>
+
+                    <!--                <form class="d-flex">-->
+                    <!--                    <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Поиск">-->
+                    <!--                    <button class="btn btn-outline-success" type="submit">Поиск</button>-->
+                    <!--                </form>-->
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+    <div class="table-user" id="users">
+        <div class="control-panel-list-user">
+            <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal">
+                <i class="fa fa-plus"></i>
+            </button>
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Add new user</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form   method="POST">
+
+                                <div class="mb-3">
+                                    <label for="exampleInput" class="form-label">Login</label>
+                                    <input type="text" class="form-control" id="exampleInput" name="new-username">
+
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputPassword1" class="form-label">Password</label>
+                                    <input type="password" class="form-control" id="exampleInputPassword1" name="new-user-new-password">
+                                </div>
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="btn"><i class="fa fa-pencil"></i></button>
+            <button class="btn"><i class="fa fa-trash"></i></button>
+        </div>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th class="col1" scope="col" >id</th>
+                <th class="col2" scope="col" >UserName</th>
+                <th class="col3" scope="col" >Role</th>
+                <th class="col4" scope="col" >Handle</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{range $index, $value := .}}
+            <tr>
+                <th scope="row">{{ $index }}</th>
+                <td>{{ $value.UserName}}</td>
+                <td>{{ $value.UserName}}</td>
+                <td><button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">Edit</a>
+                        <a class="dropdown-item" href="#">Delete</a>
+                    </div>
+                </td>
+            </tr>
+            {{end}}
+            </tbody>
+        </table>
+    </div>
+
+<script src="https://unpkg.com/vue@next"></script>
+<script type="text/javascript" src="../js/profile.js" ></script>
+
+</body>
+</html>

@@ -12,11 +12,11 @@ type Authorization interface {
 }
 
 type EndPoint interface {
-
 }
 
 type DisciplineList interface {
 	Create(userId int, item send.Discipline) (int, error)
+	GetAllDiscipline(userId int) ([]send.Discipline, error)
 }
 
 type Service struct {
@@ -27,8 +27,7 @@ type Service struct {
 
 func NewService(repos *repository.Repository) *Service {
 	return &Service{
-		Authorization: NewAuthService(repos.Authorization),
+		Authorization:  NewAuthService(repos.Authorization),
 		DisciplineList: NewDisciplineListService(repos.DisciplineList),
 	}
 }
-

@@ -16,19 +16,6 @@ CREATE TABLE users
     password_hash varchar(255) not null
 );
 
-CREATE TYPE task AS
-(
-    name text,
-    description text
-);
-
-CREATE TYPE endpoint AS
-(
-    tasks task[],
-    date_started date
-);
-
-
 CREATE TABLE discipline
 (
    id serial not null unique,
@@ -44,4 +31,23 @@ CREATE TABLE users_discipline
     users_id int references users(id) on delete cascade not null
 );
 
+CREATE TABLE groups
+(
+   id serial not null unique,
+   name varchar(255) not null unique
+);
 
+
+CREATE OR REPLACE FUNCTION group_insert() RETURNS trigger AS $$
+    BEGIN
+        INSERT INTO groups(name) VALUES (NEW.student_group);
+    RETURN NEW;
+    END;
+    $$
+    LANGUAGE 'plpgsql';
+
+CREATE TRIGGER t_students
+    AFTER INSERT
+    ON students
+    FOR EACH ROW
+    EXECUTE PROCEDURE group_insert();

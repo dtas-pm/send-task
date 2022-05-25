@@ -30,7 +30,9 @@ func (h *Handler) InitRoutes() *gin.Engine {
 
 	api := router.Group("/api", h.middlewareLogger)
 	{
-		api.GET("/endpoint", h.endPoint)
+		api.GET("/profile", h.profile)
+		api.GET("/disciplines", h.getAllDiscipline)
+		api.GET("/students", h.getStudents)
 		api.POST("/discipline", h.createDiscipline)
 	}
 

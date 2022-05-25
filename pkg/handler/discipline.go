@@ -24,7 +24,25 @@ func (h *Handler) createDiscipline(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, map[string]interface{} {
+	c.JSON(http.StatusOK, map[string]interface{}{
 		"id": id,
 	})
+}
+
+func (h *Handler) getAllDiscipline(c *gin.Context) {
+	userId, err := getUserId(c)
+	if err != nil {
+		return
+	}
+	lists, err := h.services.DisciplineList.GetAllDiscipline(userId)
+	if err != nil {
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+	c.HTML(http.StatusOK, "discipline.html", gin.H{
+		"discipline": lists,
+	})
+	//c.JSON(http.StatusOK, map[string]interface{}{
+	//	"lists": lists,
+	//})
 }

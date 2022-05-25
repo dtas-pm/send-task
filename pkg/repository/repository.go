@@ -11,11 +11,11 @@ type Authorization interface {
 }
 
 type EndPoint interface {
-
 }
 
 type DisciplineList interface {
 	Create(userId int, item send.Discipline) (int, error)
+	GetAllDiscipline(userId int) ([]send.Discipline, error)
 }
 
 type Repository struct {
@@ -26,8 +26,7 @@ type Repository struct {
 
 func NewRepository(db *sqlx.DB) *Repository {
 	return &Repository{
-		Authorization: NewAuthPostgres(db),
+		Authorization:  NewAuthPostgres(db),
 		DisciplineList: NewDisciplineListPostgres(db),
 	}
 }
-

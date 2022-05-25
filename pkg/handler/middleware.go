@@ -4,29 +4,28 @@ import (
 	"errors"
 	"github.com/gin-gonic/gin"
 	"net/http"
-	"strings"
 )
 
 const (
 	authorizationHeader = "Authorization"
-	userCtx = "userId"
+	userCtx             = "userId"
 )
 
 func (h *Handler) middlewareLogger(c *gin.Context) {
-	header := c.GetHeader(authorizationHeader)
-	if header == "" {
+	header, err := c.Cookie(authorizationHeader)
+	if err != nil {
 		newErrorResponse(c, http.StatusUnauthorized, "empty auth header")
 		return
 	}
 
-	headerParts := strings.Split(header, " ")
-	if len(headerParts) != 2 {
-		newErrorResponse(c, http.StatusUnauthorized, "invalid auth header")
-		return
-	}
+	//headerParts := strings.Split(header, " ")
+	//if len(headerParts) != 2 {
+	//	newErrorResponse(c, http.StatusUnauthorized, "invalid auth header")
+	//	return
+	//}
 
 	// parse token
-	userId, err := h.services.Authorization.ParseToken(headerParts[1])
+	userId, err := h.services.Authorization.ParseToken(header)
 	if err != nil {
 		newErrorResponse(c, http.StatusUnauthorized, err.Error())
 		return
