@@ -40,7 +40,7 @@ CREATE TABLE groups
 
 CREATE OR REPLACE FUNCTION group_insert() RETURNS trigger AS $$
     BEGIN
-        INSERT INTO groups(name) VALUES (NEW.student_group);
+        INSERT INTO groups(name) VALUES (NEW.student_group) ON CONFLICT DO NOTHING ;
     RETURN NEW;
     END;
     $$
