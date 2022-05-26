@@ -34,6 +34,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 		api.GET("/disciplines", h.getAllDiscipline)
 		api.POST("/disciplines", h.createDiscipline)
 		api.GET("/students", h.getStudents)
+		api.POST("/students", h.createStudent)
 	}
 
 	return router

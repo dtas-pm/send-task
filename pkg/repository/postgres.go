@@ -1,24 +1,25 @@
 package repository
 
-import(
+import (
 	"fmt"
 	"github.com/jmoiron/sqlx"
 )
 
 const (
-	usersTable      = "users"
-	studentsTable = "students"
-	disciplineTable = "discipline"
+	usersTable           = "users"
+	studentsTable        = "students"
+	disciplineTable      = "discipline"
 	usersDisciplineTable = "users_discipline"
+	groupsTable          = "groups"
 )
 
 type Config struct {
-	Host string
-	Port string
+	Host     string
+	Port     string
 	Username string
 	Password string
-	DBName string
-	SSLMode string
+	DBName   string
+	SSLMode  string
 }
 
 func NewPostgresDB(cfg Config) (*sqlx.DB, error) {

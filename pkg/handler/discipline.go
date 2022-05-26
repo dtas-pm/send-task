@@ -40,8 +40,15 @@ func (h *Handler) getAllDiscipline(c *gin.Context) {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
 	}
+	groups, err := h.services.GroupList.GetAllGroup()
+	if err != nil {
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
 	c.HTML(http.StatusOK, "discipline.html", gin.H{
 		"discipline": lists,
+		"groups":     groups,
 	})
 	//c.JSON(http.StatusOK, gin.H{
 	//	"lists": lists,

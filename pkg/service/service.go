@@ -19,15 +19,28 @@ type DisciplineList interface {
 	GetAllDiscipline(userId int) ([]send.Discipline, error)
 }
 
+type StudentList interface {
+	GetAllStudent() ([]send.Student, error)
+	Create(item send.Student) (int, error)
+}
+
+type GroupList interface {
+	GetAllGroup() ([]send.Group, error)
+}
+
 type Service struct {
 	Authorization
 	EndPoint
 	DisciplineList
+	StudentList
+	GroupList
 }
 
 func NewService(repos *repository.Repository) *Service {
 	return &Service{
 		Authorization:  NewAuthService(repos.Authorization),
 		DisciplineList: NewDisciplineListService(repos.DisciplineList),
+		StudentList:    NewStudentListService(repos.StudentList),
+		GroupList:      NewGroupListService(repos.GroupList),
 	}
 }

@@ -75,36 +75,81 @@
                 <i class="fa fa-plus"></i>
             </button>
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
+                <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Add new user</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
+                            <h5 class="modal-title" id="exampleModalLabel">Add new student</h5>
+                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close" aria-hidden="true"></button>
                         </div>
                         <div class="modal-body">
-                            <form   method="POST">
-
+                            <form class="was-validated" method="POST">
                                 <div class="mb-3">
-                                    <label for="exampleInput" class="form-label">Login</label>
-                                    <input type="text" class="form-control" id="exampleInput" name="new-username">
-
+                                    <label for="new-name-student" class="form-label">Name</label>
+                                    <input type="text" class="form-control" id="new-name-student" name="new-name-student" placeholder="ex: Иванов Вася"required>
+                                    <div class="invalid-feedback">please enter name</div>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="exampleInputPassword1" class="form-label">Password</label>
-                                    <input type="password" class="form-control" id="exampleInputPassword1" name="new-user-new-password">
+                                    <label for="new-login-student" class="form-label">Login</label>
+                                    <input type="text" class="form-control" id="new-login-student" name="new-login-student" required>
+                                    <div class="invalid-feedback">please enter login</div>
                                 </div>
-                                <div class="mb-3 form-check">
-                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                                <div class="mb-3">
+                                    <label for="new-email-student" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="new-email-student" name="new-email-student" placeholder="ivanov@mpei.ru" required>
+                                    <div class="invalid-feedback">please enter email</div>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <div class="mb-3">
+                                    <label for="new-group-student" class="form-label">Group</label>
+                                    <input type="text" class="form-control" id="new-group-student" name="new-group-student" required>
+                                    <div class="invalid-feedback">please enter group</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="student-institute" class="form-label">Institute</label>
+                                    <select class="form-select" name="new-institute-student" id="student-institute" aria-label="Select institute"  required>
+                                        <option value="" disabled selected>Choose institute</option>
+                                        <option value="ЭнМИ">ЭнМИ</option>
+                                        <option value="ИТАЭ">ИТАЭ</option>
+                                        <option value="ИЭВТ">ИЭВТ</option>
+                                        <option value="ИЭТЭ">ИЭТЭ</option>
+                                        <option value="ИЭЭ">ИЭЭ</option>
+                                        <option value="ИВТИ">ИВТИ</option>
+                                        <option value="ИРЭ">ИРЭ</option>
+                                        <option value="ВИИ">ВИИ</option>
+                                        <option value="ИГВИЭ">ИГВИЭ</option>
+                                        <option value="ИнЭИ">ИнЭИ</option>
+                                        <option value="ГПИ">ГПИ</option>
+                                        <option value="ИДДО">ИДДО</option>
+                                    </select>
+<!--                                    <input class="form-control" list="datalistInstitute" id="student-institute" placeholder="Type to search..." name="new-institute-student" required>-->
+<!--                                    <datalist id="datalistInstitute">-->
+<!--                                        <option value="San Francisco">-->
+<!--                                        <option value="New York">-->
+<!--                                        <option value="Seattle">-->
+<!--                                        <option value="Los Angeles">-->
+<!--                                        <option value="Chicago">-->
+<!--                                    </datalist>-->
+                                    <div class="invalid-feedback">please select institute</div>
+                                </div>
+<!--                                <div class="mb-3">-->
+<!--                                    <label for="group-discipline" class="form-label">Group</label>-->
+<!--                                    &lt;!&ndash;                                <input type="text" class="form-control" id="group-discipline" name="new-groups-discipline">&ndash;&gt;-->
+<!--                                    <select class="form-select" name="new-groups-discipline" id="group-discipline" aria-label="Select group"  required>-->
+<!--                                        <option value="" selected></option>-->
+<!--                                        {{range $index, $value := .groups}}-->
+<!--                                        <option value="{{$value.Name}}">{{$value.Name}}</option>-->
+<!--                                        {{ end }}-->
+<!--                                        &lt;!&ndash;                                    <option value="А-05-18">А-05-18</option>&ndash;&gt;-->
+<!--                                        &lt;!&ndash;                                    <option value="ИЭ-01-20">ИЭ-01-20</option>&ndash;&gt;-->
+<!--                                        &lt;!&ndash;                                    <option value="ИЭ-02-19">ИЭ-02-10</option>&ndash;&gt;-->
+<!--                                    </select>-->
+<!--                                    <div class="invalid-feedback">please select group</div>-->
+<!--                                </div>-->
+                                <button class="btn btn-outline-primary" type="submit">Submit</button>
                             </form>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
+                            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+                            <!--                        <button type="button" class="btn btn-primary">Save changes</button>-->
                         </div>
                     </div>
                 </div>
@@ -116,23 +161,28 @@
             <thead>
             <tr>
                 <th class="col1" scope="col" >id</th>
-                <th class="col2" scope="col" >UserName</th>
-                <th class="col3" scope="col" >Role</th>
-                <th class="col4" scope="col" >Handle</th>
+                <th class="col2" scope="col" >FullName</th>
+                <th class="col3" scope="col" >Login</th>
+                <th class="col4" scope="col" >Email</th>
+                <th class="col4" scope="col" >Institute</th>
+                <th class="col3" scope="col" >Group</th>
             </tr>
             </thead>
             <tbody>
-            {{range $index, $value := .}}
+            {{range $index, $value := .students}}
             <tr>
                 <th scope="row">{{ $index }}</th>
-                <td>{{ $value.UserName}}</td>
-                <td>{{ $value.UserName}}</td>
-                <td><button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">Edit</a>
-                        <a class="dropdown-item" href="#">Delete</a>
-                    </div>
-                </td>
+                <td>{{ $value.FullName}}</td>
+                <td>{{ $value.Login}}</td>
+                <td>{{ $value.Email}}</td>
+                <td>{{ $value.Institute}}</td>
+                <td>{{ $value.Group}}</td>
+<!--                <td><button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>-->
+<!--                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">-->
+<!--                        <a class="dropdown-item" href="#">Edit</a>-->
+<!--                        <a class="dropdown-item" href="#">Delete</a>-->
+<!--                    </div>-->
+<!--                </td>-->
             </tr>
             {{end}}
             </tbody>

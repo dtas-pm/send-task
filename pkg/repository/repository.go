@@ -18,15 +18,28 @@ type DisciplineList interface {
 	GetAllDiscipline(userId int) ([]send.Discipline, error)
 }
 
+type StudentList interface {
+	GetAllStudent() ([]send.Student, error)
+	Create(item send.Student) (int, error)
+}
+
+type GroupList interface {
+	GetAllGroup() ([]send.Group, error)
+}
+
 type Repository struct {
 	Authorization
 	EndPoint
 	DisciplineList
+	StudentList
+	GroupList
 }
 
 func NewRepository(db *sqlx.DB) *Repository {
 	return &Repository{
 		Authorization:  NewAuthPostgres(db),
 		DisciplineList: NewDisciplineListPostgres(db),
+		StudentList:    NewStudentListPostgres(db),
+		GroupList:      NewGroupListPostgres(db),
 	}
 }

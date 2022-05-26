@@ -167,3 +167,7 @@ body.dark-theme label > a {
 .modal-body {
     text-align: left;
 }
+
+.disciplineList h2 {
+    text-align: left;
+}
