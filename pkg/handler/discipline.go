@@ -6,6 +6,11 @@ import (
 	"net/http"
 )
 
+func (h *Handler) disciplines(c *gin.Context) {
+	http.ServeFile(c.Writer, c.Request, "./web/discipline.html")
+
+}
+
 func (h *Handler) createDiscipline(c *gin.Context) {
 	userId, err := getUserId(c)
 	if err != nil {
@@ -27,6 +32,7 @@ func (h *Handler) createDiscipline(c *gin.Context) {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
 	}
+	//c.JSON(http.StatusOK, gin.H{})
 	c.Redirect(http.StatusFound, "/api/disciplines")
 }
 
@@ -46,10 +52,11 @@ func (h *Handler) getAllDiscipline(c *gin.Context) {
 		return
 	}
 
-	c.HTML(http.StatusOK, "discipline.html", gin.H{
-		"discipline": lists,
-		"groups":     groups,
+	c.JSON(http.StatusOK, gin.H{
+		"disciplines": lists,
+		"groups":      groups,
 	})
+
 	//c.JSON(http.StatusOK, gin.H{
 	//	"lists": lists,
 	//})

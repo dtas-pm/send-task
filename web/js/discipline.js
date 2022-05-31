@@ -1,4 +1,23 @@
+// const Modal = {
+//     data() {
+//         return {
+//             disciplineName: ''
+//         }
+//     }
+// }
 //
+// Vue.createApp(Modal).mount('#app')
+
+Vue.createApp({
+    data() {
+        return {
+            disciplineName: ''
+        }
+    }
+    }
+).mount('#app')
+
+
 // Vue.createApp({
 //     data() {
 //         return {

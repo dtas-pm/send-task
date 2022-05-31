@@ -25,8 +25,8 @@ type Event struct {
 	Endpoints []Endpoint `json:"endpoints"`
 }
 
-func (d Event) Value() (driver.Value, error) {
-	return json.Marshal(d)
+func (a Event) Value() (driver.Value, error) {
+	return json.Marshal(a)
 }
 
 func (a *Event) Scan(value interface{}) error {
