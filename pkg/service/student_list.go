@@ -20,3 +20,11 @@ func (s *StudentListService) GetAllStudent() ([]send.Student, error) {
 func (s *StudentListService) Create(item send.Student) (int, error) {
 	return s.repo.Create(item)
 }
+
+func (s *StudentListService) Delete(studentId int) error {
+	return s.repo.Delete(studentId)
+}
+
+func (s *StudentListService) Update(studentId int, input send.Student) error {
+	return s.repo.Update(studentId, input)
+}

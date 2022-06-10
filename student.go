@@ -3,6 +3,7 @@ package send
 import "time"
 
 type Student struct {
+	Id        int      `json:"id" db:"id"`
 	FullName  string   `json:"full_name" db:"fullname"`
 	Login     string   `json:"login" db:"login"`
 	Email     []string `json:"email" db:"email"`
@@ -23,6 +24,7 @@ type Task struct {
 // КМ-ы
 type Endpoint struct {
 	Id    int       `json:"-"`
+	Name  string    `json:"name"`
 	Tasks []Task    `json:"tasks"`
 	Date  time.Time `json:"date"`
 }

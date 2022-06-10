@@ -17,12 +17,15 @@ func NewHandler(services *service.Service) *Handler {
 func (h *Handler) InitRoutes() *gin.Engine {
 	router := gin.New()
 
-	router.LoadHTMLGlob("web/**/*")
-	router.Static("/style", "./web/style/*")
-	router.Static("/js", "./web/js/*")
-
+	//router.LoadHTMLGlob("web/template/*")
+	//router.LoadHTMLFiles("web/template/sign-in.html", "web/template/sign-up.html", "web/template/profile.html")
+	//router.Static("/template", "./web/template")
+	router.Static("/style", "./web/style")
+	router.Static("/js", "./web/js")
+	router.Static("/api/style", "./web/style")
+	router.Static("/api/js", "./web/js")
 	router.Use(LiberalCORS)
-	//router.Use(static.Serve("/api", static.LocalFile("web", true)))
+	// router.Use(static.Serve("/api", static.LocalFile("web", true)))
 	auth := router.Group("/auth")
 	{
 		auth.POST("/sign-up", h.signUp)
@@ -33,17 +36,45 @@ func (h *Handler) InitRoutes() *gin.Engine {
 
 	api := router.Group("/api", h.middlewareLogger)
 	{
-		api.GET("/profile", h.profile)
-		disciplines := api.Group("/disciplines")
+		adminRoute := api.Group("/admin", h.middlewareRoleAdmin)
 		{
+			adminRoute.GET("/profile", h.admin)
+			students := adminRoute.Group("/students")
+			{
+				students.GET("/all", h.getStudents)
+				students.POST("/", h.createStudent)
+				students.POST("/:id", h.deleteStudent)
+				students.POST("/update/:id", h.updateStudent)
+			}
+			adminRoute.GET("/students", h.students)
 
-			disciplines.GET("/discipline", h.getAllDiscipline)
-			//disciplines.POST("/discipline", h.createDiscipline)
 		}
-		api.GET("/disciplines", h.disciplines)
-		api.POST("/disciplines", h.createDiscipline)
-		api.GET("/students", h.getStudents)
-		api.POST("/students", h.createStudent)
+		teacherRoute := api.Group("/teacher", h.middlewareRoleTeacher)
+		{
+			teacherRoute.GET("/profile", h.profile)
+			disciplines := teacherRoute.Group("/disciplines")
+			{
+
+				disciplines.GET("/all", h.getAllDiscipline)
+				disciplines.POST("/", h.createDiscipline)
+				disciplines.POST("/:id", h.deleteDiscipline)
+				//disciplines.POST("/discipline", h.createDiscipline)
+			}
+			teacherRoute.GET("/disciplines", h.disciplines)
+			planDisciplines := teacherRoute.Group("/plan-disciplines")
+			{
+
+				planDisciplines.GET("/all", h.getAllPlanDiscipline)
+				planDisciplines.POST("/", h.createPlanDiscipline)
+				planDisciplines.POST("/:id", h.deletePlanDiscipline)
+				planDisciplines.POST("/update/:id", h.updatePlanDiscipline)
+				//disciplines.POST("/discipline", h.createDiscipline)
+			}
+			teacherRoute.GET("/plan-disciplines", h.planDisciplines)
+			teacherRoute.GET("/students", h.getStudents)
+			teacherRoute.POST("/students", h.createStudent)
+		}
+
 	}
 
 	return router

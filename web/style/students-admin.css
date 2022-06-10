@@ -1,0 +1,182 @@
+body {
+    padding: 25px;
+    background-color: white;
+    color: black;
+    /*font-size: 25px;*/
+}
+
+body.dark-theme {
+    background-color: black;
+    color: white;
+}
+body.dark-theme div.offcanvas-header {
+    color: white;
+    background-color: black;
+}
+body.dark-theme div.offcanvas-header {
+    color: white;
+    background-color: black;
+}
+body.dark-theme button.text-reset {
+    color: white;
+    background-color: white;
+}
+
+body.dark-theme div.offcanvas-body {
+    color: white;
+    background-color: black;
+}
+body.dark-theme label > a {
+    color: black;
+    background-color: white;
+}
+
+
+.radio-group {
+    text-align: left;
+    padding-top: 80px;
+    padding-left: 35%;
+    padding-right: 30%;
+}
+.carousel {
+    padding-top: 70px;
+    padding-left: 15%;
+    padding-right: 15%;
+}
+.checkers {
+    /*text-align: center;*/
+    padding-top: 20px;
+    padding-left: 40%;
+    padding-right: 30%
+}
+.checkers2 {
+    padding-top: 20px;
+    padding-left: 40%;
+    padding-right: 30%
+}
+
+.input-file-section{
+    text-align: center;
+    padding-top: 20px;
+    padding-left: 25%;
+    padding-right: 30%;
+}
+.input-text-section {
+    text-align: center;
+    padding-top: 20px;
+    padding-left: 25%;
+    padding-right: 30%;
+}
+.check-validation {
+    padding-top: 10px;
+
+}
+.check-password {
+    padding-top: 10px;
+
+}
+.check-save-file {
+    padding-top: 10px;
+}
+.submit-button {
+    text-align: right;
+    margin-top: 4%;
+}
+
+.submit-button-text {
+    text-align: right;
+    padding-top: 20px;
+}
+.secret-key {
+    text-align: center;
+    padding-top: 20px;
+    padding-left: 30%;
+    padding-right: 15%;
+}
+.ranges-key-complexity {
+    text-align: center;
+    padding-top: 10px;
+    padding-left: 25%;
+    padding-right: 30%;
+}
+.ranges-key-len {
+    text-align: center;
+    padding-top: 10px;
+    padding-left: 25%;
+    padding-right: 30%;
+}
+
+.nav-item:active {
+    background-color: gainsboro;
+}
+
+.card {
+    margin-top: 4%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 0.25rem;
+}
+
+.card-body {
+    flex: 1 1 auto;
+    padding: 1rem 1rem;
+}
+.second-text {
+    margin-top: 4%;
+}
+.about-main {
+    margin-top: 4%;
+}
+.documentation {
+    margin-top: 4%;
+}
+.aboutself {
+    margin-top: 4%;
+}
+
+
+.table-user{
+    text-align: center;
+    padding-top: 40px;
+    padding-left: 20%;
+    padding-right: 20%;
+
+}
+
+.col1 {
+    width: 10%;
+}
+.col2 {
+    width: 25%;
+}
+.col3 {
+    width: 20%;
+}
+.col4 {
+    width: 10%;
+}
+.control-panel-list-user {
+    text-align: right;
+}
+.modal-body {
+    text-align: left;
+}
+
+.list-student h2 {
+    text-align: left;
+}
+
+.addEmail {
+    margin-top: 10px;
+    float: right;
+}
+
+.emailStudentInput {
+    margin-top: 20px;
+}

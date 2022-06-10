@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Plan of discipline</title>
+
+  <!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="../style/plan-discipline.css" />
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <!--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>-->
+  <script src="https://unpkg.com/vue@next"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.24/vue.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/0.7.0/vue-resource.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment-with-locales.js"></script>
+
+</head>
+<body>
+
+<div class="document-gen">
+  <nav class="navbar navbar-light bg-light fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#" onclick=window.location.reload()>DTAS-PM</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
+          <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <hr class="dropdown-divider">
+          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3" aria-labelledby="offcanvasNavbarDropdown">
+            <li class="nav-item dropdown-item">
+              <a class="nav-link active" aria-current="page" href="#" ><label class="list-itemv">Your profile</label></a>
+            </li>
+            <li class="nav-item dropdown-item">
+              <a class="nav-link active" aria-current="page" href="#" ><label class="list-itemv" onclick="window.location.href='disciplines'">Your discipline lists</label></a>
+            </li>
+            <li class="nav-item dropdown-item">
+              <a class="nav-link active" aria-current="page" href="#" ><label class="list-itemv" onclick="window.location.href='plan-disciplines'">Your plan discipline lists</label></a>
+            </li>
+            <li class="nav-item dropdown-item">
+              <a class="nav-link active" aria-current="page" href="#" ><label class="list-itemv" onclick="window.location.href='students'">Your group lists</label></a>
+            </li>
+            <li class="nav-item"><hr class="dropdown-divider"></li>
+            <!--                        <li class="nav-item dropdown-item">-->
+            <!--                            <a class="nav-link active" href="#" id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" v-on:click="show_main=false; show_about=true">-->
+            <!--                                <label class="list-itemv">Your profile</label>-->
+            <!--                            </a>-->
+            <!--                        </li>-->
+            <li class="nav-item dropdown-item">
+              <a class="nav-link active" aria-current="page" href="#" ><label class="list-itemv">Settings</label></a>
+            </li>
+            <li class="nav-item dropdown-item">
+              <a class="nav-link active" aria-current="page" href="#" ><label class="list-itemv">Help</label></a>
+            </li>
+            <!--                        <li class="nav-item">-->
+            <!--                            <div class="form-check form-switch">-->
+            <!--                                <input class="form-check-input component-active-color" type="checkbox" id="flexSwitchCheckDefault" onclick="document.body.classList.toggle('dark-theme')">-->
+            <!--                                <label class="form-check-label" for="flexSwitchCheckDefault">Dark theme</label>-->
+            <!--                            </div>-->
+            <!--                        </li>-->
+          </ul>
+
+          <!--                <form class="d-flex">-->
+          <!--                    <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Поиск">-->
+          <!--                    <button class="btn btn-outline-success" type="submit">Поиск</button>-->
+          <!--                </form>-->
+        </div>
+      </div>
+    </div>
+  </nav>
+</div>
+<div class="table-user" id="app">
+  <div class="control-panel-list-user">
+    <button type="button" class="btn" data-toggle="modal" data-target="#addDiscipline">
+      <i class="fa fa-plus"></i>
+    </button>
+    <div class="modal fade" id="addDiscipline" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Add new plan discipline</h5>
+            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close" aria-hidden="true"></button>
+          </div>
+          <div class="modal-body">
+            <form class="was-validated" method="POST">
+              <div class="mb-3">
+                <label for="new-name-plan-discipline" class="form-label">Name</label>
+                <input type="text" class="form-control" id="new-name-plan-discipline" name="new-name-plan-discipline" required>
+                <div class="invalid-feedback">please enter name</div>
+              </div>
+              <div class="mb-3">
+                <label for="new-date-plan-discipline" class="form-label">Date start</label>
+                <input type="date" class="form-control" id="new-date-plan-discipline" name="new-date-plan-discipline" required>
+                <div class="invalid-feedback">please enter date</div>
+              </div>
+              <div class="mb-3">
+                <label for="new-group-plan-discipline" class="form-label">Group</label>
+                <!--                                <input type="text" class="form-control" id="group-discipline" name="new-groups-discipline">-->
+                <select class="form-select" name="new-group-plan-discipline" id="new-group-plan-discipline" aria-label="Select group"  required>
+                  <option value="" disabled selected>Choose group</option>
+                  <option v-for="(index, value) in groups" value="{{value.name}}">{{value.name}}</option>
+                </select>
+                <div class="invalid-feedback">please select group</div>
+              </div>
+              <button class="btn btn-outline-primary" type="submit">Submit</button>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button type="button" class="btn" data-toggle="modal" data-target="#editDiscipline"><i class="fa fa-pencil"></i></button>
+    <div class="modal fade" id="editDiscipline" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="editModalLabel">Edit plan discipline</h5>
+            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close" aria-hidden="true"></button>
+          </div>
+          <div class="modal-body" id="app1">
+            <form class="was-validated" method="post" action="" @submit="updatePLanDiscipline">
+              <!--                            <div class="mb-3">-->
+              <!--                                <label for="new-name-discipline" class="form-label">Name</label>-->
+              <!--                                <input type="text" class="form-control" id="new-name-discipline1" name="new-name-discipline" required>-->
+              <!--                                <div class="invalid-feedback">please enter text</div>-->
+              <!--                            </div>-->
+              <div class="mb-3">
+                <label for="group-discipline" class="form-label">Plan discipline</label>
+
+                <select class="form-select" name="new-groups-discipline" id="group-discipline1" aria-label="Select discipline" v-model="disciplinePlanIndexCom"  required>
+                  <option value="" disabled selected>Choose plan discipline</option>
+                  <option v-for="(index, value) in plan_disciplines" value="{{index}}">{{value.id}}. {{value.name}} ({{value.group}})</option>
+                </select>
+                <div class="invalid-feedback">please select plan discipline</div>
+              </div>
+              <div class="mb-3">
+                <label for="renew-name-plan-discipline" class="form-label">Name</label>
+                <input type="text" class="form-control" id="renew-name-plan-discipline" name="renew-name-plan-discipline" v-model="disciplinePlanNameVar" required>
+                <div class="invalid-feedback">please enter name</div>
+              </div>
+              <div class="mb-3">
+                <label for="renew-date-plan-discipline" class="form-label">Date start</label>
+                <input type="date" class="form-control" id="renew-date-plan-discipline" name="renew-date-plan-discipline" v-model="disciplinePlanDateVar" required>
+                <div class="invalid-feedback">please enter date</div>
+              </div>
+              <div class="mb-3">
+                <label for="renew-group-plan-discipline" class="form-label">Group</label>
+                <select class="form-select" name="renew-group-plan-discipline" id="renew-group-plan-discipline" aria-label="Select group" v-model="disciplinePlanGroupVar" required>
+                  <option value="" disabled selected>Choose group</option>
+                  <option v-for="(index, value) in groups" value="{{value.name}}">{{value.name}}</option>
+                </select>
+                <div class="invalid-feedback">please select group</div>
+              </div>
+              <div class="mb-3">
+                <div class="row events-header">
+                  <div class="col-6"><label for="renew-event-plan-discipline" class="form-label">Events</label></div>
+                  <div class="col"><button type="button" id="addEventBtn" class="addEvent btn btn-outline-secondary btn-sm" @click="addEvent" disabled>Add event</button></div>
+                </div>
+                <div class="row events-data" id="renew-event-plan-discipline" v-for="(index, value) in disciplinePlanEvent">
+                  <div class="col-9 events-data-value">
+                    <label>Event: {{index}}</label><br>
+                    <label for="renew-event-name-discipline{{index}}" class="form-label">Name event</label>
+                    <input type="text" id="renew-event-name-discipline{{index}}" class="form-control" name="renew-event-name-discipline{{index}}" v-model="value.name" required>
+                    <div class="invalid-feedback">please enter name</div>
+
+                    <label for="renew-event-date-discipline{{index}}" class="form-label">Date event</label>
+                    <input type="date" id="renew-event-date-discipline{{index}}" class="form-control" name="renew-event-date-discipline{{index}}" v-model="value.date" required>
+                    <div class="invalid-feedback">please enter date</div>
+
+                    <label for="renew-event-lab-discipline{{index}}" class="form-label">Labs event</label>
+                    <input type="text" id="renew-event-lab-discipline{{index}}" class="form-control" name="renew-event-lab-discipline{{index}}" placeholder="Лаб1, Лаб2" v-model="value.tasks">
+                    <hr>
+                  </div>
+                  <div class="col removeEvent"><button class="btn btn-outline-secondary" type="button" @click="removeEvent(index)"><i class="fa fa-trash"></i></button></div>
+                </div>
+
+              </div>
+              <button class="btn btn-outline-primary" type="submit">Submit</button>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button type="button" class="btn" data-toggle="modal" data-target="#deleteDiscipline"><i class="fa fa-trash"></i></button>
+    <div class="modal fade" id="deleteDiscipline" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="deleteModalLabel">Delete plan discipline</h5>
+            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close" aria-hidden="true"></button>
+          </div>
+          <div class="modal-body">
+            <form class="was-validated">
+              <div class="mb-3">
+                <label for="group-discipline" class="form-label">Plan discipline</label>
+                <select class="form-select" name="delete-groups-discipline" id="group-discipline2" aria-label="Select discipline" v-model="disciplinePlanIndex"  required>
+                  <option value="" disabled selected>Choose plan discipline</option>
+                  <option v-for="(index, value) in plan_disciplines" value="{{index}}">{{value.id}}. {{value.name}}</option>
+                </select>
+                <div class="invalid-feedback">please select discipline</div>
+              </div>
+              <button class="btn btn-outline-primary" type="button" @click="deleteDiscipline">Submit</button>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+            <!--                        <button type="button" class="btn btn-primary">Save changes</button>-->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="disciplineList">
+    <h2>Планы дисциплин </h2>
+    <div class="accordion" id="accordionDiscipline">
+      <div class="accordion-item" v-for="(index, value) in plan_disciplines">
+        <h2 class="accordion-header" id="heading{{ index }}">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEvent{{ index }}" aria-expanded="false" aria-controls="collapseEvent{{ index }}">
+            {{index}}. {{value.name}} {{value.group}}
+            Дата начала: {{value.date_start}}}
+          </button>
+        </h2>
+        <div id="collapseEvent{{ index }}" class="accordion-collapse collapse" aria-labelledby="{{ index }}">
+          <div class="accordion-body">
+            <table class="table">
+              <thead>
+              <tr>
+                <th scope="col">&#8470;</th>
+                <th scope="col">Мероприятие</th>
+                <th scope="col">Материал</th>
+                <th scope="col">Дата</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr v-for="(index2, value2) in value.event.endpoints_pd">
+                <th scope="row">{{index2}}</th>
+                <td>{{value2.name}}</td>
+                <td>{{value2.tasks}}</td>
+                <td>{{value2.date}}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--<script type="text/javascript" src="../js/discipline.js" >-->
+<script>
+  new Vue({
+            el: '#app',
+            data() {
+              return {
+                disciplinePlanIndex: '',
+                submitIdPlanDiscipline: '',
+                plan_disciplines: [],
+                groups: [],
+                disciplinePlanEvent: [],
+                disciplinePlanNameVar: '',
+                disciplinePlanGroupVar: '',
+                disciplinePlanDateVar: '',
+              }
+            },
+            computed: {
+              discipline: function () {
+                return this.plan_disciplines[this.disciplineIndex]
+              },
+              disciplinePlanIndexCom: {
+                get: function() {
+                  return this.disciplinePlanIndex
+                },
+                set: function (newValue) {
+                  this.disciplinePlanIndex = newValue
+                  this.disciplinePlanNameVar = this.plan_disciplines[this.disciplinePlanIndex].name
+                  this.disciplinePlanGroupVar = this.plan_disciplines[this.disciplinePlanIndex].group
+                  this.disciplinePlanDateVar = moment(this.plan_disciplines[this.disciplinePlanIndex].date_start).format('YYYY-MM-DD')
+                  this.disciplinePlanEvent = this.plan_disciplines[this.disciplinePlanIndex].event.endpoints_pd
+                  document.getElementById('addEventBtn').disabled = false;
+
+                }
+              },
+
+            },
+            created() {
+              this.$http.get(`https://localhost:8080/api/teacher/plan-disciplines/all`).then(
+                      (resp) => {
+                        console.log(`resp:`, resp.data)
+                        this.plan_disciplines = resp.data.plan_disciplines
+                        this.groups = resp.data.groups
+                      });
+            },
+            methods: {
+              addEvent() {
+                if (this.disciplinePlanEvent == null) {
+                  this.disciplinePlanEvent = []
+                }
+                this.disciplinePlanEvent.push({
+                  name: "",
+                  date: "",
+                  tasks: "",
+                })
+              },
+              // addLab(index) {
+              //   this.disciplinePlanEvent[index].tasks.push("")
+              // },
+              removeEvent(index) {
+                this.disciplinePlanEvent.splice(index, 1)
+              },
+              addEndpoint() {
+                if (typeof(this.disciplines[this.disciplineIndex].event) == 'undefined') {
+                  this.disciplines[this.disciplineIndex].event = {}
+                }
+                this.event = this.disciplines[this.disciplineIndex].event
+                this.event.endpoints.push(this.endpoint)
+              },
+              deleteDiscipline() {
+
+                //  let currentURL = new URL(window.location.href + '/')
+                // currentURL.searchParams.set('id', this.disciplineIndex)
+                let indexDiscipline = this.plan_disciplines[this.disciplinePlanIndex].id
+                this.plan_disciplines.splice(this.disciplinePlanIndex, 1)
+                this.$http.post(window.location.href + '/' + indexDiscipline).then(
+                        (resp) => {
+                          console.log(`resp:`, resp)
+                        });
+
+              },
+              updatePLanDiscipline(e) {
+
+                let idPlanDiscipline = this.plan_disciplines[this.disciplinePlanIndex].id
+                this.submitIdPlanDiscipline = idPlanDiscipline
+                let planDisciplineJSON = JSON.stringify(
+                        {
+                          group: this.disciplinePlanGroupVar,
+                          name: this.disciplinePlanNameVar,
+                          date_start: new Date(this.disciplinePlanDateVar),
+                          event: {
+                            endpoints_pd: this.disciplinePlanEvent,
+                          }
+                        }
+                )
+                this.$http.post(window.location.href + '/update/' + idPlanDiscipline, planDisciplineJSON).then(
+                        (resp) => {
+                          console.log(`resp:`, resp)
+                        });
+                e.preventDefault();
+                window.location.reload()
+              }
+            }
+          }
+  )
+</script>
+
+</body>
+</html>

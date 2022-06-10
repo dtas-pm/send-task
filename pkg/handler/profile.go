@@ -7,5 +7,10 @@ import (
 
 func (h *Handler) profile(c *gin.Context) {
 	// id, _ := c.Get(userCtx)
-	c.HTML(http.StatusOK, "profile.html", gin.H{})
+	http.ServeFile(c.Writer, c.Request, "./web/template/profile.html")
+}
+
+func (h *Handler) admin(c *gin.Context) {
+	// id, _ := c.Get(userCtx)
+	http.ServeFile(c.Writer, c.Request, "./web/template/admin.html")
 }

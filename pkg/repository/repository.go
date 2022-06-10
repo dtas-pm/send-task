@@ -16,11 +16,21 @@ type EndPoint interface {
 type DisciplineList interface {
 	Create(userId int, item send.Discipline) (int, error)
 	GetAllDiscipline(userId int) ([]send.Discipline, error)
+	Delete(userId, disciplineId int) error
+}
+
+type PlanDisciplineList interface {
+	Create(userId int, item send.PlanDiscipline) (int, error)
+	GetAllPlanDiscipline(userId int) ([]send.PlanDiscipline, error)
+	Delete(userId, disciplineId int) error
+	Update(userId, disciplineId int, item send.PlanDiscipline) error
 }
 
 type StudentList interface {
 	GetAllStudent() ([]send.Student, error)
 	Create(item send.Student) (int, error)
+	Delete(studentId int) error
+	Update(studentId int, input send.Student) error
 }
 
 type GroupList interface {
@@ -31,15 +41,17 @@ type Repository struct {
 	Authorization
 	EndPoint
 	DisciplineList
+	PlanDisciplineList
 	StudentList
 	GroupList
 }
 
 func NewRepository(db *sqlx.DB) *Repository {
 	return &Repository{
-		Authorization:  NewAuthPostgres(db),
-		DisciplineList: NewDisciplineListPostgres(db),
-		StudentList:    NewStudentListPostgres(db),
-		GroupList:      NewGroupListPostgres(db),
+		Authorization:      NewAuthPostgres(db),
+		DisciplineList:     NewDisciplineListPostgres(db),
+		PlanDisciplineList: NewPlanDisciplineListPostgres(db),
+		StudentList:        NewStudentListPostgres(db),
+		GroupList:          NewGroupListPostgres(db),
 	}
 }

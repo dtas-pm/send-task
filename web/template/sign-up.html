@@ -9,32 +9,77 @@
     ></script>
     <link rel="stylesheet" href="../style/sign-up.css" />
     <title>Sign in</title>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.24/vue.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/0.7.0/vue-resource.min.js"></script>
 </head>
 <body>
-<div class="center">
+<div class="center" id="app">
     <h1>Sign Up</h1>
-    <form method="post">
+    <form  method="post">
         <div class="txt_field">
-            <input type="text" name="name" required>
+            <input type="text" name="name" autocomplete="name" required>
             <span></span>
             <label>Name</label>
         </div>
+
         <div class="txt_field">
-            <input type="text" name="username" required>
+            <input type="text" name="username" autocomplete="username" spellcheck="false" required>
             <span></span>
             <label>Username</label>
         </div>
         <div class="txt_field">
-            <input type="password" name="password" required>
+            <input type="password" autocomplete="new-password" name="password1" spellcheck="false" v-model="password1" required>
             <span></span>
             <label>Password</label>
         </div>
-        <input type="submit" value="Login">
+        <div class="txt_field">
+            <input type="password" autocomplete="new-password" name="password2" spellcheck="false" v-model="password2" required>
+            <span></span>
+            <label>Confirm password</label>
+        </div>
+        <div class="txt_field">
+            <input type="email" autocomplete="email username" name="email" spellcheck="false" required>
+            <span></span>
+            <label>Email</label>
+        </div>
+        <label class="confirm">{{ confirmPassword }}</label>
+        <input type="submit" value="Login" onsubmit="window.location.href='sign-in'">
         <div class="signup_link">
-            Have an account? <a href="#" onclick="window.location.href='sign-in'">Sign In</a>
+            Have an account? <a href="#" onclick="window.location.href='sign-in'" @click="toSignIn">Sign In</a>
         </div>
     </form>
 </div>
-<script src="../js/app.js"></script>
+<script>
+    new Vue({
+            el: '#app',
+            data() {
+                return {
+                    password1: '',
+                    password2: '',
+                }
+            },
+            computed: {
+                confirmPassword() {
+                    if (this.password1 !== this.password2) {
+                        return 'The passwords you entered do not match'
+                    }
+                    return ''
+                }
+            },
+            methods: {
+                toSignIn() {
+                    this.$http.get(`https://localhost:8080/auth/sign-in`).then(
+                        (resp) => {
+                            console.log(`resp:`, resp)
+                        });
+                }
+
+            }
+        }
+    )
+
+</script>
 </body>
 </html>

@@ -17,7 +17,7 @@ func NewStudentListPostgres(db *sqlx.DB) *StudentListPostgres {
 
 func (r *StudentListPostgres) GetAllStudent() ([]send.Student, error) {
 	var lists []send.Student
-	query := fmt.Sprintf("SELECT fullname, login, email, student_group, institute FROM %s",
+	query := fmt.Sprintf("SELECT id, fullname, login, email, student_group, institute FROM %s",
 		studentsTable)
 	// err := r.db.Select(&lists, query)
 	rows, err := r.db.Query(query)
@@ -26,7 +26,7 @@ func (r *StudentListPostgres) GetAllStudent() ([]send.Student, error) {
 	}
 	for rows.Next() {
 		var student send.Student
-		err = rows.Scan(&student.FullName, &student.Login, (*pq.StringArray)(&student.Email), &student.Group, &student.Institute)
+		err = rows.Scan(&student.Id, &student.FullName, &student.Login, (*pq.StringArray)(&student.Email), &student.Group, &student.Institute)
 		if err != nil {
 			return []send.Student{}, err
 		}
@@ -45,4 +45,18 @@ func (r *StudentListPostgres) Create(item send.Student) (int, error) {
 		return 0, err
 	}
 	return id, nil
+}
+
+func (r *StudentListPostgres) Delete(studentId int) error {
+	query := fmt.Sprintf("DELETE FROM %s  WHERE id = $1",
+		studentsTable)
+	_, err := r.db.Exec(query, studentId)
+	return err
+}
+
+func (r *StudentListPostgres) Update(studentId int, input send.Student) error {
+	query := fmt.Sprintf("UPDATE %s SET fullname=$2, login=$3, email=$4, student_group=$5, institute=$6  WHERE id = $1",
+		studentsTable)
+	_, err := r.db.Exec(query, studentId, input.FullName, input.Login, pq.Array(input.Email), input.Group, input.Institute)
+	return err
 }

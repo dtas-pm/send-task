@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Students</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="../style/students-admin.css" />
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+
+  <script src="https://unpkg.com/vue@next"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.24/vue.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/0.7.0/vue-resource.min.js"></script>
+</head>
+<body id="app">
+
+<div class="document-gen">
+  <nav class="navbar navbar-light bg-light fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#" onclick=window.location.reload()>DTAS-PM</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
+          <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <hr class="dropdown-divider">
+          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3" aria-labelledby="offcanvasNavbarDropdown">
+            <li class="nav-item dropdown-item">
+              <a class="nav-link active" aria-current="page" href="#" ><label class="list-itemv">Your profile</label></a>
+            </li>
+            <!--                        <li class="nav-item dropdown-item">-->
+            <!--                            <a class="nav-link active" aria-current="page" href="#" ><label class="list-itemv" onclick="window.location.href='disciplines'">Your discipline lists</label></a>-->
+            <!--                        </li>-->
+            <li class="nav-item dropdown-item">
+              <a class="nav-link active" aria-current="page" href="#" ><label class="list-itemv" onclick="window.location.href='students'">Student lists</label></a>
+            </li>
+            <li class="nav-item"><hr class="dropdown-divider"></li>
+            <!--                        <li class="nav-item dropdown-item">-->
+            <!--                            <a class="nav-link active" href="#" id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" v-on:click="show_main=false; show_about=true">-->
+            <!--                                <label class="list-itemv">Your profile</label>-->
+            <!--                            </a>-->
+            <!--                        </li>-->
+            <li class="nav-item dropdown-item">
+              <a class="nav-link active" aria-current="page" href="#" ><label class="list-itemv">Settings</label></a>
+            </li>
+            <li class="nav-item dropdown-item">
+              <a class="nav-link active" aria-current="page" href="#" ><label class="list-itemv">Help</label></a>
+            </li>
+            <!--                        <li class="nav-item">-->
+            <!--                            <div class="form-check form-switch">-->
+            <!--                                <input class="form-check-input component-active-color" type="checkbox" id="flexSwitchCheckDefault" onclick="document.body.classList.toggle('dark-theme')">-->
+            <!--                                <label class="form-check-label" for="flexSwitchCheckDefault">Dark theme</label>-->
+            <!--                            </div>-->
+            <!--                        </li>-->
+          </ul>
+
+          <!--                <form class="d-flex">-->
+          <!--                    <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Поиск">-->
+          <!--                    <button class="btn btn-outline-success" type="submit">Поиск</button>-->
+          <!--                </form>-->
+        </div>
+      </div>
+    </div>
+  </nav>
+</div>
+<div class="table-user" id="users">
+  <div class="control-panel-list-user">
+    <button type="button" class="btn" data-toggle="modal" data-target="#createStudent">
+      <i class="fa fa-plus"></i>
+    </button>
+    <div class="modal fade" id="createStudent" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Add new student</h5>
+            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close" aria-hidden="true"></button>
+          </div>
+          <div class="modal-body">
+            <form class="was-validated" method="POST">
+              <div class="mb-3">
+                <label for="new-name-student" class="form-label">Name</label>
+                <input type="text" class="form-control" id="new-name-student" name="new-name-student" placeholder="ex: Иванов Вася"required>
+                <div class="invalid-feedback">please enter name</div>
+              </div>
+              <div class="mb-3">
+                <label for="new-login-student" class="form-label">Login</label>
+                <input type="text" class="form-control" id="new-login-student" name="new-login-student" required>
+                <div class="invalid-feedback">please enter login</div>
+              </div>
+              <div class="mb-3">
+                <label for="new-email-student" class="form-label">Email</label>
+                <input type="email" class="form-control" id="new-email-student" name="new-email-student" placeholder="ivanov@mpei.ru" required>
+                <div class="invalid-feedback">please enter email</div>
+              </div>
+              <div class="mb-3">
+                <label for="new-group-student" class="form-label">Group</label>
+                <input type="text" class="form-control" id="new-group-student" name="new-group-student" required>
+                <div class="invalid-feedback">please enter group</div>
+              </div>
+              <div class="mb-3">
+                <label for="student-institute" class="form-label">Institute</label>
+                <select class="form-select" name="new-institute-student" id="student-institute" aria-label="Select institute"  required>
+                  <option value="" disabled selected>Choose institute</option>
+                  <option value="ЭнМИ">ЭнМИ</option>
+                  <option value="ИТАЭ">ИТАЭ</option>
+                  <option value="ИЭВТ">ИЭВТ</option>
+                  <option value="ИЭТЭ">ИЭТЭ</option>
+                  <option value="ИЭЭ">ИЭЭ</option>
+                  <option value="ИВТИ">ИВТИ</option>
+                  <option value="ИРЭ">ИРЭ</option>
+                  <option value="ВИИ">ВИИ</option>
+                  <option value="ИГВИЭ">ИГВИЭ</option>
+                  <option value="ИнЭИ">ИнЭИ</option>
+                  <option value="ГПИ">ГПИ</option>
+                  <option value="ИДДО">ИДДО</option>
+                </select>
+                <!--                                    <input class="form-control" list="datalistInstitute" id="student-institute" placeholder="Type to search..." name="new-institute-student" required>-->
+                <!--                                    <datalist id="datalistInstitute">-->
+                <!--                                        <option value="San Francisco">-->
+                <!--                                        <option value="New York">-->
+                <!--                                        <option value="Seattle">-->
+                <!--                                        <option value="Los Angeles">-->
+                <!--                                        <option value="Chicago">-->
+                <!--                                    </datalist>-->
+                <div class="invalid-feedback">please select institute</div>
+              </div>
+              <button class="btn btn-outline-primary" type="submit">Submit</button>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+            <!--                        <button type="button" class="btn btn-primary">Save changes</button>-->
+          </div>
+        </div>
+      </div>
+    </div>
+    <button type="button" class="btn" data-toggle="modal" data-target="#editStudent"><i class="fa fa-pencil"></i></button>
+    <div class="modal fade" id="editStudent" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="editModalLabel">Edit student</h5>
+            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close" aria-hidden="true"></button>
+          </div>
+          <div class="modal-body">
+            <form class="was-validated" method="POST">
+              <!--                            <div class="mb-3">-->
+              <!--                                <label for="new-name-discipline" class="form-label">Name</label>-->
+              <!--                                <input type="text" class="form-control" id="new-name-discipline1" name="new-name-discipline" required>-->
+              <!--                                <div class="invalid-feedback">please enter text</div>-->
+              <!--                            </div>-->
+              <div class="mb-3">
+                <label for="student-list" class="form-label">Student</label>
+
+                <select class="form-select" name="select-student" id="student-list" aria-label="Select student" v-model="studentIndexCom"  required>
+                  <option value="" disabled selected>Choose student</option>
+                  <option v-for="(index, value) in students" value="{{index}}">{{value.id}}) {{value.full_name}} ({{value.group}})</option>
+                </select>
+                <div class="invalid-feedback">please select student</div>
+              </div>
+              <div class="mb-3">
+                <label for="renew-name-student" class="form-label">Full Name</label>
+                <input type="text" class="form-control" id="renew-name-student" name="renew-name-student" v-model="studentNameVar" required>
+                <div class="invalid-feedback">please enter name</div>
+              </div>
+              <div class="mb-3">
+                <label for="renew-login-student" class="form-label">Login</label>
+                <input type="text" class="form-control" id="renew-login-student" name="renew-login-student" v-model="studentLoginVar" required>
+                <div class="invalid-feedback">please enter login</div>
+              </div>
+              <div class="mb-3">
+                <div>
+                <label for="renew-email-student" class="form-label">Email</label>
+                <button type="button" class="addEmail btn btn-outline-secondary btn-sm" @click="addEmail">Add email</button>
+                </div>
+                <div class="row emailStudentInput" id="renew-email-student" v-for="(index, value) in studentEmails">
+                  <div class="col-6"><input type="email" class="form-control" name="renew-email-student{{index}}" v-model="value" required>
+                    <div class="invalid-feedback">please enter email</div>
+                  </div>
+                  <div class="col"><button class="btn btn-outline-secondary" type="button" @click="removeEmail(index)"><i class="fa fa-trash"></i></button></div>
+                </div>
+                <div class="toast-container position-fixed bottom-0 end-0 p-3">
+                <div class="toast" id="errorEmail" role="alert" aria-live="assertive" aria-atomic="true">
+                  <div class="toast-header">
+                    <strong class="me-auto">DTAS-PM</strong>
+                    <small>now</small>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                  </div>
+                  <div class="toast-body">
+                    У студента должен быть как минимум один email-адрес
+                  </div>
+                 </div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="renew-group-student" class="form-label">Group</label>
+                <input type="text" class="form-control" id="renew-group-student" name="renew-group-student" v-model="studentGroupVar" required>
+                <div class="invalid-feedback">please enter group</div>
+              </div>
+              <div class="mb-3">
+                <label for="renew-institute-student" class="form-label">Institute</label>
+                <select class="form-select" id="renew-institute-student" name="renew-institute-student" v-model="studentInstituteVar" required>
+                  <option value="" disabled selected>Choose institute</option>
+                  <option value="ЭнМИ">ЭнМИ</option>
+                  <option value="ИТАЭ">ИТАЭ</option>
+                  <option value="ИЭВТ">ИЭВТ</option>
+                  <option value="ИЭТЭ">ИЭТЭ</option>
+                  <option value="ИЭЭ">ИЭЭ</option>
+                  <option value="ИВТИ">ИВТИ</option>
+                  <option value="ИРЭ">ИРЭ</option>
+                  <option value="ВИИ">ВИИ</option>
+                  <option value="ИГВИЭ">ИГВИЭ</option>
+                  <option value="ИнЭИ">ИнЭИ</option>
+                  <option value="ГПИ">ГПИ</option>
+                  <option value="ИДДО">ИДДО</option>
+                </select>
+<!--                <input type="text" class="form-control" id="renew-institute-student" name="renew-institute-student" v-model="studentInstitute" required>-->
+                <div class="invalid-feedback">please enter institute</div>
+              </div>
+              <button class="btn btn-outline-primary" type="button" @click="updateStudent">Submit</button>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+            <!--                        <button type="button" class="btn btn-primary">Save changes</button>-->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn" type="button" data-toggle="modal" data-target="#deleteStudent"><i class="fa fa-trash"></i></button>
+    <div class="modal fade" id="deleteStudent" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="deleteModalLabel">Delete student</h5>
+            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close" aria-hidden="true"></button>
+          </div>
+          <div class="modal-body">
+            <form class="was-validated">
+              <div class="mb-3">
+                <label for="group-student" class="form-label">Student</label>
+                <select class="form-select" name="delete-groups-discipline" id="group-student" aria-label="Select student" v-model="studentIndex"  required>
+                  <option value="" disabled selected>Choose student</option>
+                  <option v-for="(index, value) in students" value="{{index}}">{{value.id}}. {{value.full_name}}</option>
+                </select>
+                <div class="invalid-feedback">please select student</div>
+              </div>
+              <button class="btn btn-outline-primary" type="button" @click="deleteStudent">Submit</button>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+            <!--                        <button type="button" class="btn btn-primary">Save changes</button>-->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="list-student">
+    <h2>Студенты</h2>
+    <div>
+  <table class="table table-hover">
+    <thead>
+    <tr>
+      <th class="col1" scope="col" >id</th>
+      <th class="col2" scope="col" >FullName</th>
+      <th class="col3" scope="col" >Login</th>
+      <th class="col4" scope="col" >Email</th>
+      <th class="col4" scope="col" >Institute</th>
+      <th class="col3" scope="col" >Group</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr v-for="(index, value) in students">
+      <th scope="row">{{index}}</th>
+      <td>{{value.full_name}}</td>
+      <td>{{value.login}}</td>
+      <td>{{value.email}}</td>
+      <td>{{value.institute}}</td>
+      <td>{{value.group}}</td>
+    </tr>
+    </tbody>
+  </table>
+    </div>
+  </div>
+</div>
+
+<script>
+  new Vue({
+            el: '#app',
+            data() {
+              return {
+                studentIndex: '',
+                students: [],
+                studentEmails: [],
+                studentNameVar: '',
+                studentGroupVar: '',
+                studentLoginVar: '',
+                studentInstituteVar: '',
+                errorEmailText: '',
+              }
+            },
+            computed: {
+              studentIndexCom: {
+                  get: function() {
+                    return this.studentIndex
+                  },
+                  set: function (newValue) {
+                    this.studentIndex = newValue
+                    this.studentNameVar = this.students[this.studentIndex].full_name
+                    this.studentGroupVar = this.students[this.studentIndex].group
+                    this.studentLoginVar = this.students[this.studentIndex].login
+                    this.studentInstituteVar = this.students[this.studentIndex].institute
+                    this.studentEmails = this.students[this.studentIndex].email
+                  }
+              },
+            },
+            created() {
+              this.$http.get(`https://localhost:8080/api/admin/students/all`).then(
+                      (resp) => {
+                        console.log(`resp:`, resp.data)
+                        //console.log(`resp-event:`, resp.data.disciplines[0].event)
+                        this.students = resp.data.students
+                      });
+            },
+            methods: {
+              deleteStudent() {
+                //  let currentURL = new URL(window.location.href + '/')
+                // currentURL.searchParams.set('id', this.disciplineIndex)
+                let idStudent = this.students[this.studentIndex].id
+                this.students.splice(this.studentIndex, 1)
+                this.$http.post(window.location.href + '/' + idStudent).then(
+                        (resp) => {
+                          console.log(`resp:`, resp)
+                        });
+              },
+              updateStudent() {
+                let idStudent = this.students[this.studentIndex].id
+                let studentJSON = JSON.stringify(
+                        {
+                            group: this.studentGroupVar,
+                            full_name: this.studentNameVar,
+                            email: this.studentEmails,
+                            institute: this.studentInstituteVar,
+                            login: this.studentLoginVar
+                        }
+                )
+                this.$http.post(window.location.href + '/update/' + idStudent, studentJSON).then(
+                        (resp) => {
+                          console.log(`resp:`, resp)
+                        });
+                window.location.reload()
+              },
+              addEmail() {
+                this.studentEmails.push("")
+              },
+              removeEmail(index) {
+                if (this.studentEmails.length === 1) {
+                   const toastError = document.getElementById('errorEmail')
+                   const toast = new bootstrap.Toast(toastError)
+                   toast.show()
+                   return
+                }
+                this.studentEmails.splice(index, 1)
+              }
+            }
+          }
+  )
+</script>
+</body>
+</html>

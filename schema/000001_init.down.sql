@@ -1,3 +1,7 @@
+DROP TABLE users_plan_discipline;
+
+DROP TABLE plan_discipline;
+
 DROP TABLE users_discipline;
 
 DROP TABLE users;

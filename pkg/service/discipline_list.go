@@ -20,3 +20,7 @@ func (s *DisciplineListService) Create(userId int, item send.Discipline) (int, e
 func (s *DisciplineListService) GetAllDiscipline(userId int) ([]send.Discipline, error) {
 	return s.repo.GetAllDiscipline(userId)
 }
+
+func (s *DisciplineListService) Delete(userId, disciplineId int) error {
+	return s.repo.Delete(userId, disciplineId)
+}

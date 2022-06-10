@@ -4,10 +4,11 @@ import (
 	"github.com/dtas-pm/send-task"
 	"github.com/gin-gonic/gin"
 	"net/http"
+	"strconv"
 )
 
 func (h *Handler) disciplines(c *gin.Context) {
-	http.ServeFile(c.Writer, c.Request, "./web/discipline.html")
+	http.ServeFile(c.Writer, c.Request, "./web/template/discipline.html")
 
 }
 
@@ -33,7 +34,7 @@ func (h *Handler) createDiscipline(c *gin.Context) {
 		return
 	}
 	//c.JSON(http.StatusOK, gin.H{})
-	c.Redirect(http.StatusFound, "/api/disciplines")
+	c.Redirect(http.StatusFound, "/api/teacher/disciplines")
 }
 
 func (h *Handler) getAllDiscipline(c *gin.Context) {
@@ -60,4 +61,31 @@ func (h *Handler) getAllDiscipline(c *gin.Context) {
 	//c.JSON(http.StatusOK, gin.H{
 	//	"lists": lists,
 	//})
+}
+
+func (h *Handler) deleteDiscipline(c *gin.Context) {
+	userId, err := getUserId(c)
+	if err != nil {
+		return
+	}
+
+	id, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		newErrorResponse(c, http.StatusBadRequest, err.Error())
+		return
+	}
+
+	//if err := c.BindJSON(&input); err != nil {
+	//	newErrorResponse(c, http.StatusBadRequest, err.Error())
+	//	return
+	//}
+	err = h.services.DisciplineList.Delete(userId, id)
+	if err != nil {
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	c.JSON(http.StatusOK, statusResponse{
+		Status: "ok",
+	})
 }

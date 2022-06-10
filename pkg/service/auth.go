@@ -11,7 +11,7 @@ import (
 )
 
 const (
-	salt = "nafodainda92372bninanq2rf"
+	salt       = "nafodainda92372bninanq2rf"
 	signingKey = "qrkjk#4#%35FSFJlja#4353KSFjH"
 	tokenTTL   = 12 * time.Hour
 )
@@ -30,15 +30,16 @@ func NewAuthService(repo repository.Authorization) *AuthService {
 }
 
 func (s *AuthService) CreateUser(user send.User) (int, error) {
-	 user.Password = generatePasswordHash(user.Password)
+	user.Password = generatePasswordHash(user.Password)
+	fmt.Println(user.Password)
 	return s.repo.CreateUser(user)
 }
 
-
-func (s *AuthService) GenerateToken(username, password string) (string, error) {
+func (s *AuthService) GenerateToken(username, password string) (string, string, error) {
 	user, err := s.repo.GetUser(username, generatePasswordHash(password))
+
 	if err != nil {
-		return "", err
+		return "", "", err
 	}
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, &tokenClaims{
@@ -49,7 +50,8 @@ func (s *AuthService) GenerateToken(username, password string) (string, error) {
 		user.Id,
 	})
 
-	return token.SignedString([]byte(signingKey))
+	tokenSignedString, err := token.SignedString([]byte(signingKey))
+	return user.Role, tokenSignedString, err
 }
 
 func (s *AuthService) ParseToken(accessToken string) (int, error) {

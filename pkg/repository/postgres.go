@@ -6,11 +6,13 @@ import (
 )
 
 const (
-	usersTable           = "users"
-	studentsTable        = "students"
-	disciplineTable      = "discipline"
-	usersDisciplineTable = "users_discipline"
-	groupsTable          = "groups"
+	usersTable               = "users"
+	studentsTable            = "students"
+	disciplineTable          = "discipline"
+	planDisciplineTable      = "plan_discipline"
+	usersDisciplineTable     = "users_discipline"
+	usersPlanDisciplineTable = "users_plan_discipline"
+	groupsTable              = "groups"
 )
 
 type Config struct {

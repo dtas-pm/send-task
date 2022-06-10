@@ -6,7 +6,7 @@
 
 <!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="style/discipline.css" />
+    <link rel="stylesheet" href="../style/discipline.css" />
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
@@ -42,6 +42,9 @@
                         </li>
                         <li class="nav-item dropdown-item">
                             <a class="nav-link active" aria-current="page" href="#" ><label class="list-itemv" onclick="window.location.href='disciplines'">Your discipline lists</label></a>
+                        </li>
+                        <li class="nav-item dropdown-item">
+                            <a class="nav-link active" aria-current="page" href="#" ><label class="list-itemv" onclick="window.location.href='plan-disciplines'">Your plan discipline lists</label></a>
                         </li>
                         <li class="nav-item dropdown-item">
                             <a class="nav-link active" aria-current="page" href="#" ><label class="list-itemv" onclick="window.location.href='students'">Your group lists</label></a>
@@ -156,6 +159,47 @@
                                 <input type="text" class="form-control" id="renew-group-discipline" name="renew-group-discipline" v-model="disciplineGroup" required>
                                 <div class="invalid-feedback">please enter group</div>
                             </div>
+                            <div class="mb-3">
+                                <label for="renew-km-discipline" class="form-label">Endpoints</label>
+
+                                <button type="button" class="btn" data-toggle="modal" data-target="#kmDiscipline" @click='addEndpoint'>
+                                    <i class="fa fa-plus"></i>
+                                </button>
+                                <input type="text" class="form-control" id="renew-km-discipline" name="renew-km-discipline" v-model="disciplineGroup" required>
+                                <div class="invalid-feedback">please enter group</div>
+                            </div>
+                            <div class="modal fade " id="kmDiscipline" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+                                <div class="modal-dialog modal-dialog-centered modal-fullscreen-md-down">
+                                    <div class="modal-content border border-3 border-warning">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalToggleLabel2">New Endpoint</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="mb-3">
+                                                <label for="new-endpoint-name-discipline" class="form-label">Name endpoint</label>
+                                                <input type="text" class="form-control" id="new-endpoint-name-discipline" name="new-endpoint-name-discipline" required>
+                                                <div class="invalid-feedback">please enter name endpoint</div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="new-endpoint-date-discipline" class="form-label">Date endpoint</label>
+                                                <input type="date" class="form-control" id="new-endpoint-date-discipline" name="new-endpoint-date-discipline" required>
+                                                <div class="invalid-feedback">please enter date endpoint</div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="new-endpoint-task-discipline" class="form-label">Tasks</label>
+                                                <button type="button" class="btn btn-outline-secondary btn-sm" @click='addTask'>New task</button>
+                                                <input type="text" class="form-control" id="new-endpoint-task-discipline" name="new-endpoint-date-discipline" required>
+                                                <div class="invalid-feedback">please enter date endpoint</div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Back to first</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
 <!--                            {{range $index, $value := .discipline}}-->
 <!--                            <div class="mb-3" v-show="disciplineName === '{{$value.Name}}'">-->
 <!--                                <label for="renew-group-discipline" class="form-label">Group</label>-->
@@ -182,7 +226,37 @@
                 </div>
             </div>
         </div>
-        <button class="btn"><i class="fa fa-trash"></i></button>
+        <button type="button" class="btn" data-toggle="modal" data-target="#deleteDiscipline">
+            <i class="fa fa-trash"></i>
+        </button>
+        <div class="modal fade" id="deleteDiscipline" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteModalLabel">Delete discipline</h5>
+                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close" aria-hidden="true"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="was-validated">
+                            <div class="mb-3">
+                                <label for="group-discipline" class="form-label">Discipline</label>
+                                <select class="form-select" name="delete-groups-discipline" id="group-discipline2" aria-label="Select discipline" v-model="disciplineIndex"  required>
+                                    <option value="" disabled selected>Choose discipline</option>
+                                    <option v-for="(index, value) in disciplines" value="{{index}}">{{value.id}}. {{value.name}}</option>
+
+                                </select>
+                                <div class="invalid-feedback">please select discipline</div>
+                            </div>
+                            <button class="btn btn-outline-primary" type="button" @click="deleteDiscipline">Submit</button>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+                        <!--                        <button type="button" class="btn btn-primary">Save changes</button>-->
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="disciplineList">
         <h2>Дисциплины </h2>
@@ -208,7 +282,24 @@
                 </h2>
                 <div id="collapseEvent{{ index }}" class="accordion-collapse collapse" aria-labelledby="{{ index }}">
                     <div class="accordion-body">
-                        <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">&#8470;</th>
+                                <th scope="col">Название контрольного мероприятия</th>
+                                <th scope="col">Лабы</th>
+                                <th scope="col">Дата</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr v-for="(index2, value2) in value.event.endpoints">
+                                <th scope="row">{{index2}}</th>
+                                <td>{{value2.name}}</td>
+                                <td>{{value2.tasks}}</td>
+                                <td>{{value2.date}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -238,7 +329,10 @@
                 return {
                     disciplineIndex: '',
                     disciplines: [],
-                    groups: []
+                    groups: [],
+                    tasks: [],
+                    endpoint: {name:'', task:'', date:''},
+                    event: {endpoints:[]},
                 }
             },
             computed: {
@@ -251,14 +345,41 @@
                 discipline: function () {
                     return this.disciplines[this.disciplineIndex]
                 }
+
             },
             created() {
-                this.$http.get(`https://localhost:8080/api/disciplines/discipline`).then(
+                this.$http.get(`https://localhost:8080/api/teacher/disciplines/all`).then(
                     (resp) => {
                         console.log(`resp:`, resp.data)
+                        //console.log(`resp-event:`, resp.data.disciplines[0].event)
                         this.disciplines = resp.data.disciplines
                         this.groups = resp.data.groups
                     });
+            },
+            methods: {
+                addTask() {
+                  //  this.tasks = this.discipline[this.disciplineIndex].endpoint
+                   // this.tasks.push()
+                },
+                addEndpoint() {
+                    if (typeof(this.disciplines[this.disciplineIndex].event) == 'undefined') {
+                        this.disciplines[this.disciplineIndex].event = {}
+                    }
+                    this.event = this.disciplines[this.disciplineIndex].event
+                    this.event.endpoints.push(this.endpoint)
+                },
+                deleteDiscipline() {
+
+                   //  let currentURL = new URL(window.location.href + '/')
+                    // currentURL.searchParams.set('id', this.disciplineIndex)
+                    let indexDiscipline = this.disciplines[this.disciplineIndex].id
+                    this.disciplines.splice(this.disciplineIndex, 1)
+                    this.$http.post(window.location.href + '/' + indexDiscipline).then(
+                        (resp) => {
+                            console.log(`resp:`, resp)
+                        });
+
+                }
             }
         }
     )

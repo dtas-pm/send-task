@@ -12,6 +12,9 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
 
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.24/vue.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/0.7.0/vue-resource.min.js"></script>
 </head>
 <body>
 
@@ -36,6 +39,9 @@
                         </li>
                         <li class="nav-item dropdown-item">
                             <a class="nav-link active" aria-current="page" href="#" ><label class="list-itemv" onclick="window.location.href='disciplines'">Your discipline lists</label></a>
+                        </li>
+                        <li class="nav-item dropdown-item">
+                            <a class="nav-link active" aria-current="page" href="#" ><label class="list-itemv" onclick="window.location.href='plan-disciplines'">Your plan discipline lists</label></a>
                         </li>
                         <li class="nav-item dropdown-item">
                             <a class="nav-link active" aria-current="page" href="#" ><label class="list-itemv" onclick="window.location.href='students'">Your group lists</label></a>
@@ -189,8 +195,69 @@
         </table>
     </div>
 
-<script src="https://unpkg.com/vue@next"></script>
 <script type="text/javascript" src="../js/profile.js" ></script>
+<script>
+    new Vue({
+            el: '#app',
+            data() {
+                return {
+                    disciplineIndex: '',
+                    students: [],
+                    groups: [],
+                    tasks: [],
+                    endpoint: {name:'', task:'', date:''},
+                    event: {endpoints:[]},
+                }
+            },
+            computed: {
+                disciplineName: function () {
+                    return this.disciplines[this.disciplineIndex].name
+                },
+                disciplineGroup: function () {
+                    return this.disciplines[this.disciplineIndex].group
+                },
+                discipline: function () {
+                    return this.disciplines[this.disciplineIndex]
+                }
 
+            },
+            created() {
+                this.$http.get(`https://localhost:8080/api/teacher/disciplines/all`).then(
+                    (resp) => {
+                        console.log(`resp:`, resp.data)
+                        //console.log(`resp-event:`, resp.data.disciplines[0].event)
+                        this.disciplines = resp.data.disciplines
+                        this.groups = resp.data.groups
+                    });
+            },
+            methods: {
+                addTask() {
+                    //  this.tasks = this.discipline[this.disciplineIndex].endpoint
+                    // this.tasks.push()
+                },
+                addEndpoint() {
+                    if (typeof(this.disciplines[this.disciplineIndex].event) == 'undefined') {
+                        this.disciplines[this.disciplineIndex].event = {}
+                    }
+                    this.event = this.disciplines[this.disciplineIndex].event
+                    this.event.endpoints.push(this.endpoint)
+                },
+                deleteDiscipline() {
+
+                    //  let currentURL = new URL(window.location.href + '/')
+                    // currentURL.searchParams.set('id', this.disciplineIndex)
+                    let indexDiscipline = this.disciplines[this.disciplineIndex].id
+                    this.disciplines.splice(this.disciplineIndex, 1)
+                    this.$http.post(window.location.href + '/' + indexDiscipline).then(
+                        (resp) => {
+                            console.log(`resp:`, resp)
+                        });
+
+                }
+            }
+        }
+    )
+
+</script>
 </body>
 </html>

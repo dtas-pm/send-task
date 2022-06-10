@@ -46,3 +46,11 @@ func (r *DisciplineListPostgres) GetAllDiscipline(userId int) ([]send.Discipline
 
 	return lists, err
 }
+
+func (r *DisciplineListPostgres) Delete(userId, disciplineId int) error {
+	query := fmt.Sprintf("DELETE FROM %s tl USING %s ul WHERE tl.id = ul.discipline_id AND ul.users_id=$1 AND ul.discipline_id=$2",
+		disciplineTable, usersDisciplineTable)
+	_, err := r.db.Exec(query, userId, disciplineId)
+
+	return err
+}
